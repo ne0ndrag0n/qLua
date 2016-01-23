@@ -15,6 +15,9 @@ public:
     explicit KahluaIDE(QWidget *parent = 0);
     ~KahluaIDE();
 
+private slots:
+    void on_actionE_xit_triggered();
+
 private:
     Ui::KahluaIDE *ui;
 };

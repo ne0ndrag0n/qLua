@@ -1,5 +1,6 @@
 #include "kahluaide.h"
 #include "ui_kahluaide.h"
+#include <cstdlib>
 
 KahluaIDE::KahluaIDE(QWidget *parent) :
     QMainWindow(parent),
@@ -11,4 +12,9 @@ KahluaIDE::KahluaIDE(QWidget *parent) :
 KahluaIDE::~KahluaIDE()
 {
     delete ui;
+}
+
+void KahluaIDE::on_actionE_xit_triggered()
+{
+    exit( 0 );
 }

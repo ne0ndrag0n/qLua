@@ -18,7 +18,6 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -70,7 +69,6 @@ public:
     QMenu *menu_Debug;
     QMenu *menu_Options;
     QMenu *menu_Help;
-    QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *KahluaIDE)
@@ -151,7 +149,7 @@ public:
         KahluaIDE->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(KahluaIDE);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 400, 21));
+        menuBar->setGeometry(QRect(0, 0, 400, 22));
         menu_File = new QMenu(menuBar);
         menu_File->setObjectName(QStringLiteral("menu_File"));
         menu_Edit = new QMenu(menuBar);
@@ -169,9 +167,6 @@ public:
         menu_Help = new QMenu(menuBar);
         menu_Help->setObjectName(QStringLiteral("menu_Help"));
         KahluaIDE->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(KahluaIDE);
-        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-        KahluaIDE->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(KahluaIDE);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         KahluaIDE->setStatusBar(statusBar);
