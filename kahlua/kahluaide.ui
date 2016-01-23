@@ -14,22 +14,30 @@
    <string>ne0ndrag0n qLua</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QsciScintilla" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>401</width>
-      <height>251</height>
-     </rect>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="leftMargin">
+     <number>0</number>
     </property>
-    <property name="toolTip">
-     <string/>
+    <property name="topMargin">
+     <number>0</number>
     </property>
-    <property name="whatsThis">
-     <string/>
+    <property name="rightMargin">
+     <number>0</number>
     </property>
-   </widget>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QsciScintilla" name="textEdit">
+      <property name="toolTip">
+       <string/>
+      </property>
+      <property name="whatsThis">
+       <string/>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

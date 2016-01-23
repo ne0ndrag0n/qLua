@@ -14,8 +14,10 @@ TEMPLATE = app
 LIBS += -lqscintilla2
 
 SOURCES += main.cpp\
-        kahluaide.cpp
+        kahluaide.cpp \
+    luaengine.cpp
 
-HEADERS  += kahluaide.h
+HEADERS  += kahluaide.h \
+    luaengine.h
 
 FORMS    += kahluaide.ui

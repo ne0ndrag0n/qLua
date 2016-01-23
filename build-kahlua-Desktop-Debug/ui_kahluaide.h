@@ -18,6 +18,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "Qsci/qsciscintilla.h"
 
@@ -61,6 +62,7 @@ public:
     QAction *actionUsing_Help;
     QAction *action_About;
     QWidget *centralWidget;
+    QVBoxLayout *verticalLayout;
     QsciScintilla *textEdit;
     QMenuBar *menuBar;
     QMenu *menu_File;
@@ -148,9 +150,16 @@ public:
         action_About->setObjectName(QStringLiteral("action_About"));
         centralWidget = new QWidget(KahluaIDE);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        verticalLayout = new QVBoxLayout(centralWidget);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
         textEdit = new QsciScintilla(centralWidget);
         textEdit->setObjectName(QStringLiteral("textEdit"));
-        textEdit->setGeometry(QRect(0, 0, 401, 251));
+
+        verticalLayout->addWidget(textEdit);
+
         KahluaIDE->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(KahluaIDE);
         menuBar->setObjectName(QStringLiteral("menuBar"));
