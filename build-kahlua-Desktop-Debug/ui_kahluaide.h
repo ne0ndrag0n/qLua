@@ -19,6 +19,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
+#include "Qsci/qsciscintilla.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -60,6 +61,7 @@ public:
     QAction *actionUsing_Help;
     QAction *action_About;
     QWidget *centralWidget;
+    QsciScintilla *textEdit;
     QMenuBar *menuBar;
     QMenu *menu_File;
     QMenu *menu_Edit;
@@ -146,6 +148,9 @@ public:
         action_About->setObjectName(QStringLiteral("action_About"));
         centralWidget = new QWidget(KahluaIDE);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        textEdit = new QsciScintilla(centralWidget);
+        textEdit->setObjectName(QStringLiteral("textEdit"));
+        textEdit->setGeometry(QRect(0, 0, 401, 251));
         KahluaIDE->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(KahluaIDE);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -262,6 +267,12 @@ public:
         action_Topic_s->setText(QApplication::translate("KahluaIDE", "&Topic: %s", 0));
         actionUsing_Help->setText(QApplication::translate("KahluaIDE", "Using &Help", 0));
         action_About->setText(QApplication::translate("KahluaIDE", "&About...", 0));
+#ifndef QT_NO_TOOLTIP
+        textEdit->setToolTip(QString());
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_WHATSTHIS
+        textEdit->setWhatsThis(QString());
+#endif // QT_NO_WHATSTHIS
         menu_File->setTitle(QApplication::translate("KahluaIDE", "&File", 0));
         menu_Edit->setTitle(QApplication::translate("KahluaIDE", "&Edit", 0));
         menu_View->setTitle(QApplication::translate("KahluaIDE", "&View", 0));

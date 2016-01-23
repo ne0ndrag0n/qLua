@@ -11,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = kahlua
 TEMPLATE = app
 
+LIBS += -lqscintilla2
 
 SOURCES += main.cpp\
         kahluaide.cpp
