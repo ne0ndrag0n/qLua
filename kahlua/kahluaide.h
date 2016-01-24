@@ -2,6 +2,7 @@
 #define KAHLUAIDE_H
 
 #include <QMainWindow>
+#include "luaengine.h"
 
 namespace Ui {
 class KahluaIDE;
