@@ -17,9 +17,12 @@ LIBS += -lqscintilla2 -llua5.2
 
 SOURCES += main.cpp\
         kahluaide.cpp \
-    luaengine.cpp
+    luaengine.cpp \
+    outputdevice.cpp
 
 HEADERS  += kahluaide.h \
-    luaengine.h
+    luaengine.h \
+    outputdevice.h
 
-FORMS    += kahluaide.ui
+FORMS    += kahluaide.ui \
+    outputdevice.ui
