@@ -20,7 +20,8 @@ private slots:
     void on_actionE_xit_triggered();
 
 private:
-    Ui::KahluaIDE *ui;
+    Ui::KahluaIDE* ui;
+    LuaEngine* engine;
 };
 
 #endif // KAHLUAIDE_H

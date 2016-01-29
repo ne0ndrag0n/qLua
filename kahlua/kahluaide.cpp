@@ -1,16 +1,17 @@
 #include "kahluaide.h"
 #include "ui_kahluaide.h"
+#include "luaengine.h"
 #include <cstdlib>
 
-KahluaIDE::KahluaIDE(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::KahluaIDE)
-{
+KahluaIDE::KahluaIDE( QWidget *parent ) :
+    QMainWindow( parent ), ui( new Ui::KahluaIDE ), engine( new LuaEngine( this ) ) {
     ui->setupUi(this);
 }
 
 KahluaIDE::~KahluaIDE()
 {
+    delete this->engine;
+
     delete ui;
 }
 

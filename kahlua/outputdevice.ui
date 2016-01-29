@@ -14,8 +14,27 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item row="0" column="0">
-    <widget class="QGraphicsView" name="graphicsView"/>
+    <widget class="QLabel" name="label">
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

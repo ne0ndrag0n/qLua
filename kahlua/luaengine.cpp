@@ -1,7 +1,13 @@
 #include "luaengine.h"
 #include "lua.hpp"
+#include "outputdevice.h"
+#include <QMainWindow>
 
-LuaEngine::LuaEngine() {
+LuaEngine::LuaEngine( QMainWindow* parent )
+    : parent( parent ) {
+
+    this->screen = new OutputDevice( parent );
+
     this->L = luaL_newstate();
     luaL_openlibs( this->L );
 }

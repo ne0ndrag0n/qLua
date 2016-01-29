@@ -4,11 +4,10 @@
 #include <QDialog>
 
 namespace Ui {
-class OutputDevice;
+    class OutputDevice;
 }
 
-class OutputDevice : public QDialog
-{
+class OutputDevice : public QDialog {
     Q_OBJECT
 
 public:

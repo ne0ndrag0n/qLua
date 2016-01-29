@@ -50,11 +50,15 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../kahlua/main.cpp \
 		../kahlua/kahluaide.cpp \
-		../kahlua/luaengine.cpp moc_kahluaide.cpp
+		../kahlua/luaengine.cpp \
+		../kahlua/outputdevice.cpp moc_kahluaide.cpp \
+		moc_outputdevice.cpp
 OBJECTS       = main.o \
 		kahluaide.o \
 		luaengine.o \
-		moc_kahluaide.o
+		outputdevice.o \
+		moc_kahluaide.o \
+		moc_outputdevice.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -117,9 +121,11 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../kahlua/kahlua.pro ../kahlua/kahluaide.h \
-		../kahlua/luaengine.h ../kahlua/main.cpp \
+		../kahlua/luaengine.h \
+		../kahlua/outputdevice.h ../kahlua/main.cpp \
 		../kahlua/kahluaide.cpp \
-		../kahlua/luaengine.cpp
+		../kahlua/luaengine.cpp \
+		../kahlua/outputdevice.cpp
 QMAKE_TARGET  = kahlua
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = kahlua
@@ -147,7 +153,7 @@ first: all
 
 ####### Build rules
 
-$(TARGET): ui_kahluaide.h $(OBJECTS)  
+$(TARGET): ui_kahluaide.h ui_outputdevice.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../kahlua/kahlua.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -295,9 +301,9 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../kahlua/kahluaide.h ../kahlua/luaengine.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../kahlua/main.cpp ../kahlua/kahluaide.cpp ../kahlua/luaengine.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../kahlua/kahluaide.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../kahlua/kahluaide.h ../kahlua/luaengine.h ../kahlua/outputdevice.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../kahlua/main.cpp ../kahlua/kahluaide.cpp ../kahlua/luaengine.cpp ../kahlua/outputdevice.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../kahlua/kahluaide.ui ../kahlua/outputdevice.ui $(DISTDIR)/
 
 
 clean:compiler_clean 
@@ -320,20 +326,27 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_kahluaide.cpp
+compiler_moc_header_make_all: moc_kahluaide.cpp moc_outputdevice.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_kahluaide.cpp
-moc_kahluaide.cpp: ../kahlua/kahluaide.h
+	-$(DEL_FILE) moc_kahluaide.cpp moc_outputdevice.cpp
+moc_kahluaide.cpp: ../kahlua/luaengine.h \
+		../kahlua/kahluaide.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/katsu/Projects/qLua/kahlua -I/usr/include/lua5.2 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../kahlua/kahluaide.h -o moc_kahluaide.cpp
+
+moc_outputdevice.cpp: ../kahlua/outputdevice.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/katsu/Projects/qLua/kahlua -I/usr/include/lua5.2 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../kahlua/outputdevice.h -o moc_outputdevice.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_kahluaide.h
+compiler_uic_make_all: ui_kahluaide.h ui_outputdevice.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_kahluaide.h
+	-$(DEL_FILE) ui_kahluaide.h ui_outputdevice.h
 ui_kahluaide.h: ../kahlua/kahluaide.ui \
 		/usr/include/x86_64-linux-gnu/qt5/Qsci/qsciscintilla.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../kahlua/kahluaide.ui -o ui_kahluaide.h
+
+ui_outputdevice.h: ../kahlua/outputdevice.ui
+	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../kahlua/outputdevice.ui -o ui_outputdevice.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -345,18 +358,27 @@ compiler_clean: compiler_moc_header_clean compiler_uic_clean
 
 ####### Compile
 
-main.o: ../kahlua/main.cpp ../kahlua/kahluaide.h
+main.o: ../kahlua/main.cpp ../kahlua/kahluaide.h \
+		../kahlua/luaengine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../kahlua/main.cpp
 
 kahluaide.o: ../kahlua/kahluaide.cpp ../kahlua/kahluaide.h \
+		../kahlua/luaengine.h \
 		ui_kahluaide.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o kahluaide.o ../kahlua/kahluaide.cpp
 
 luaengine.o: ../kahlua/luaengine.cpp ../kahlua/luaengine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o luaengine.o ../kahlua/luaengine.cpp
 
+outputdevice.o: ../kahlua/outputdevice.cpp ../kahlua/outputdevice.h \
+		ui_outputdevice.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o outputdevice.o ../kahlua/outputdevice.cpp
+
 moc_kahluaide.o: moc_kahluaide.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_kahluaide.o moc_kahluaide.cpp
+
+moc_outputdevice.o: moc_outputdevice.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_outputdevice.o moc_outputdevice.cpp
 
 ####### Install
 
