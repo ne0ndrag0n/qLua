@@ -1,6 +1,7 @@
 #include "luaengine.h"
 #include "lua.hpp"
 #include "outputdevice.h"
+#include <iostream>
 #include <QMainWindow>
 
 LuaEngine::LuaEngine( QMainWindow* parent )
@@ -14,4 +15,8 @@ LuaEngine::LuaEngine( QMainWindow* parent )
 
 LuaEngine::~LuaEngine () {
     lua_close( this->L );
+}
+
+void LuaEngine::toggleOutputDevice() {
+    this->screen->show();
 }

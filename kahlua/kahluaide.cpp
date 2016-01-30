@@ -19,3 +19,8 @@ void KahluaIDE::on_actionE_xit_triggered()
 {
     exit( 0 );
 }
+
+void KahluaIDE::on_action_Output_Device_triggered()
+{
+    this->engine->toggleOutputDevice();
+}

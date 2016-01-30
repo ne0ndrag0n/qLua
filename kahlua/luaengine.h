@@ -9,6 +9,8 @@ class LuaEngine {
     public:
         LuaEngine( QMainWindow* parent );
         ~LuaEngine();
+
+        void toggleOutputDevice();
     private:
         lua_State* L;
         OutputDevice* screen;

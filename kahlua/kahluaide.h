@@ -19,6 +19,8 @@ public:
 private slots:
     void on_actionE_xit_triggered();
 
+    void on_action_Output_Device_triggered();
+
 private:
     Ui::KahluaIDE* ui;
     LuaEngine* engine;
