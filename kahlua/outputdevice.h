@@ -6,6 +6,8 @@
 #include <QImage>
 #include <QPainter>
 #include <QTextBrowser>
+#include <QColor>
+#include <QPixmap>
 
 namespace Ui {
     class OutputDevice;
@@ -25,6 +27,7 @@ public:
 
     void setDimensions( int width, int height );
     void setGraphicsMode( ScreenType type );
+    void drawLine( int x, int y, int x2, int y2, QColor color );
 
 private:
     Ui::OutputDevice* ui;
