@@ -7,16 +7,18 @@
 LuaEngine::LuaEngine( QMainWindow* parent )
     : parent( parent ) {
 
-    this->screen = new OutputDevice( parent );
+    screen = new OutputDevice( /* parent */ );
 
-    this->L = luaL_newstate();
-    luaL_openlibs( this->L );
+    L = luaL_newstate();
+    luaL_openlibs( L );
 }
 
 LuaEngine::~LuaEngine () {
-    lua_close( this->L );
+    lua_close( L );
+
+    delete screen;
 }
 
 void LuaEngine::toggleOutputDevice() {
-    this->screen->show();
+    screen->show();
 }

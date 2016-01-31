@@ -241,7 +241,7 @@ public:
 
     void retranslateUi(QMainWindow *KahluaIDE)
     {
-        KahluaIDE->setWindowTitle(QApplication::translate("KahluaIDE", "ne0ndrag0n qLua", 0));
+        KahluaIDE->setWindowTitle(QApplication::translate("KahluaIDE", "Untitled - ne0ndrag0n qLua", 0));
         action_New->setText(QApplication::translate("KahluaIDE", "&New", 0));
         action_Open->setText(QApplication::translate("KahluaIDE", "&Open", 0));
         action_Save->setText(QApplication::translate("KahluaIDE", "&Save", 0));

@@ -2,6 +2,9 @@
 #define OUTPUTDEVICE_H
 
 #include <QDialog>
+#include <QLabel>
+#include <QImage>
+#include <QPainter>
 
 namespace Ui {
     class OutputDevice;
@@ -14,8 +17,19 @@ public:
     explicit OutputDevice(QWidget *parent = 0);
     ~OutputDevice();
 
+    void setDimensions( int width, int height );
+
 private:
-    Ui::OutputDevice *ui;
+    Ui::OutputDevice* ui;
+
+    QImage* buffer;
+    QPainter* painter;
+
+    int width;
+    int height;
+
+    void createImage();
+    void blit();
 };
 
 #endif // OUTPUTDEVICE_H
