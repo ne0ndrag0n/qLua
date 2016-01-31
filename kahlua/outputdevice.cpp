@@ -2,6 +2,8 @@
 #include "ui_outputdevice.h"
 #include <QImage>
 #include <QPixmap>
+#include <QLabel>
+#include <QTextBrowser>
 
 OutputDevice::OutputDevice(QWidget *parent) :
     QDialog(parent),
@@ -10,6 +12,7 @@ OutputDevice::OutputDevice(QWidget *parent) :
     ui->setupUi(this);
     setFixedSize( size() );
 
+    setGraphicsMode( GRAPHICAL );
     setDimensions( 640, 480 ); // DEBUG !!
     createImage();
     blit();
@@ -21,6 +24,19 @@ OutputDevice::~OutputDevice() {
     if( buffer != NULL ) {
         delete buffer;
     }
+}
+
+void OutputDevice::setGraphicsMode( ScreenType type ) {
+    switch( type ) {
+        case GRAPHICAL:
+            ui->stackedWidget->setCurrentIndex( 0 );
+            break;
+        case TEXTUAL:
+        default:
+            ui->stackedWidget->setCurrentIndex( 1 );
+    }
+
+    currentType = type;
 }
 
 void OutputDevice::setDimensions( int width, int height ) {

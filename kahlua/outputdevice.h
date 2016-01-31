@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QImage>
 #include <QPainter>
+#include <QTextBrowser>
 
 namespace Ui {
     class OutputDevice;
@@ -13,11 +14,17 @@ namespace Ui {
 class OutputDevice : public QDialog {
     Q_OBJECT
 
+    enum ScreenType {
+        GRAPHICAL,
+        TEXTUAL
+    };
+
 public:
     explicit OutputDevice(QWidget *parent = 0);
     ~OutputDevice();
 
     void setDimensions( int width, int height );
+    void setGraphicsMode( ScreenType type );
 
 private:
     Ui::OutputDevice* ui;
@@ -27,6 +34,8 @@ private:
 
     int width;
     int height;
+
+    ScreenType currentType;
 
     void createImage();
     void blit();
