@@ -8,6 +8,7 @@
 #include <QTextBrowser>
 #include <QColor>
 #include <QPixmap>
+#include <QString>
 
 namespace Ui {
     class OutputDevice;
@@ -28,6 +29,7 @@ public:
     void setDimensions( int width, int height );
     void setGraphicsMode( ScreenType type );
     void drawLine( int x, int y, int x2, int y2, QColor color );
+    void print( QString str );
 
 private:
     Ui::OutputDevice* ui;
@@ -40,7 +42,7 @@ private:
 
     ScreenType currentType;
 
-    void createImage();
+    void createBuffer();
     void blit();
 };
 

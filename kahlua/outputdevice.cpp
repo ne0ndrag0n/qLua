@@ -6,26 +6,25 @@
 #include <QTextBrowser>
 #include <QColor>
 #include <QPainter>
+#include <QString>
 
 OutputDevice::OutputDevice(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::OutputDevice)
-{
+    QDialog(parent), ui(new Ui::OutputDevice) {
     buffer = NULL;
+    setDimensions( 640, 480 );
 
     ui->setupUi(this);
     setFixedSize( size() );
 
     painter = new QPainter();
 
-    setGraphicsMode( GRAPHICAL );
-    setDimensions( 640, 480 ); // DEBUG !!
-    createImage();
-    blit();
+    setGraphicsMode( TEXTUAL );
+    print( QString( "This is a test" ) );
 }
 
 OutputDevice::~OutputDevice() {
     delete ui;
+    delete painter;
 
     if( buffer ) {
         delete buffer;
@@ -36,6 +35,7 @@ void OutputDevice::setGraphicsMode( ScreenType type ) {
     switch( type ) {
         case GRAPHICAL:
             ui->stackedWidget->setCurrentIndex( 0 );
+            createBuffer();
             break;
         case TEXTUAL:
         default:
@@ -45,30 +45,42 @@ void OutputDevice::setGraphicsMode( ScreenType type ) {
     currentType = type;
 }
 
+void OutputDevice::print( QString str ) {
+    if( currentType == GRAPHICAL ) {
+        // STUB !!
+    } else {
+        // Output to QTextBrowser
+        ui->console->append( str );
+    }
+}
+
 void OutputDevice::setDimensions( int width, int height ) {
     this->width = width;
     this->height = height;
 }
 
 void OutputDevice::drawLine( int x, int y, int x2, int y2, QColor color ) {
-    painter->begin( buffer );
-    painter->setPen( color );
-    painter->drawLine( x, y, x2, y2 );
-    painter->end();
-    blit();
+    if( buffer ) {
+        painter->begin( buffer );
+        painter->setPen( color );
+        painter->drawLine( x, y, x2, y2 );
+        painter->end();
+        blit();
+    }
 }
 
 /**
  * @brief OutputDevice::createImage
  * @private
  */
-void OutputDevice::createImage() {
+void OutputDevice::createBuffer() {
     if( buffer ) {
         delete buffer;
     }
 
     buffer = new QImage( width, height, QImage::Format_RGB32 );
     buffer->fill( 0xFF000000 );
+    blit();
 }
 
 /**
@@ -77,5 +89,7 @@ void OutputDevice::createImage() {
  * Copy the buffer QImage to the QLabel
  */
 void OutputDevice::blit() {
-    ui->display->setPixmap( QPixmap::fromImage( *buffer ) );
+    if( buffer ) {
+        ui->display->setPixmap( QPixmap::fromImage( *buffer ) );
+    }
 }
