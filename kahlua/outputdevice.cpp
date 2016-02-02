@@ -19,7 +19,6 @@ OutputDevice::OutputDevice(QWidget *parent) :
     painter = new QPainter();
 
     setGraphicsMode( TEXTUAL );
-    print( QString( "This is a test" ) );
 }
 
 OutputDevice::~OutputDevice() {
