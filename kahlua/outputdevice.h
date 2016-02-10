@@ -43,6 +43,7 @@ private:
     ScreenType currentType;
 
     void createBuffer();
+    void fontSetup();
     void blit();
 };
 

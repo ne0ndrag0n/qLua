@@ -7,6 +7,8 @@
 #include <QColor>
 #include <QPainter>
 #include <QString>
+#include <QFontDatabase>
+#include <iostream>
 
 OutputDevice::OutputDevice(QWidget *parent) :
     QDialog(parent), ui(new Ui::OutputDevice) {
@@ -19,6 +21,7 @@ OutputDevice::OutputDevice(QWidget *parent) :
     painter = new QPainter();
 
     setGraphicsMode( TEXTUAL );
+    fontSetup();
 }
 
 OutputDevice::~OutputDevice() {
@@ -28,6 +31,11 @@ OutputDevice::~OutputDevice() {
     if( buffer ) {
         delete buffer;
     }
+}
+
+void OutputDevice::fontSetup() {
+    int result = QFontDatabase::addApplicationFont( ":/font.ttf" );
+    std::cout << result << std::endl;
 }
 
 void OutputDevice::setGraphicsMode( ScreenType type ) {
