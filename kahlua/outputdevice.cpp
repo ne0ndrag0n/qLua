@@ -34,7 +34,7 @@ OutputDevice::~OutputDevice() {
 }
 
 void OutputDevice::fontSetup() {
-    int result = QFontDatabase::addApplicationFont( ":/font.ttf" );
+    int result = QFontDatabase::addApplicationFont( "../font.ttf" );
     std::cout << result << std::endl;
 }
 
